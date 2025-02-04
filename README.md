@@ -12,7 +12,7 @@ Welcome to my GitHub profile! I’m an enthusiastic and adaptable tech enthusias
 ### 🚀 [WhatsApp Chat Summarizer](https://github.com/samudra-07/whatsapp-chat-summarizer)  
 Analyze and summarize WhatsApp chats for key insights using AI-powered algorithms.  
 
-### 🤖 [Emotion Recognition Model] (https://github.com/samudra-07/emotion-detection-using-facial-expression) 
+### 🤖 [Emotion Recognition Model](https://github.com/samudra-07/emotion-detection-using-facial-expression) 
 Developed a machine learning model that detects human emotions based on facial expressions.  
 
 ### 🔧 Task Bidder Web App  
