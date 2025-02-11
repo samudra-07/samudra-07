@@ -23,7 +23,7 @@ An innovative platform where customers post tasks, and workers bid to provide co
 ![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=samudra-07&layout=compact&theme=radical)  
 
 ## 📊 LeetCode Stats  
-![LeetCode Stats](https://img.shields.io/badge/LeetCode%20Solved-300-green)  
+![LeetCode Stats](https://img.shields.io/badge/LeetCode%20Solved-330-green)  
 
 ## 🌐 Connect with Me  
 - 📫 **Email:** [samudraguptabarma@gmail.com](mailto:samudraguptabarma@gmail.com)  
