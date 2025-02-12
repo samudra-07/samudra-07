@@ -30,9 +30,10 @@ An innovative platform where customers post tasks, and workers bid to provide co
 
 ---
 
-## 📊 Codeforces Stats  
-**Rating**: ![Codeforces Rating](https://codeforces-stats-api.vercel.app/api?username=samudra038&field=rating)  
-**Rank**: ![Codeforces Rank](https://codeforces-stats-api.vercel.app/api?username=samudra038&field=rank)  
+## 📊 Codeforces Stats
+
+<!-- CF-STATS-END -->
+
 
 ---
 
