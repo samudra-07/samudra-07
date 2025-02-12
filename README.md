@@ -30,8 +30,8 @@ An innovative platform where customers post tasks, and workers bid to provide co
 
 ## 📊 Codeforces Stats
 
-![](https://raw.githubusercontent.com/samudra-07/cf-stats/main/output/max_rating.svg)
-![](https://raw.githubusercontent.com/samudra-07/cf-stats/main/output/rating.svg)
+![](https://raw.githubusercontent.com/samudra-07/cf-stats/main/output/light_card.svg#gh-dark-mode-only)
+
 
 
 ## 📊 LeetCode Stats  
