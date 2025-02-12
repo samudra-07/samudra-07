@@ -30,16 +30,8 @@ An innovative platform where customers post tasks, and workers bid to provide co
 
 ## 📊 Codeforces Stats
 
-<!-- CF-STATS -->
-| **Codeforces Stats**        |                                    |
-|-----------------------------|------------------------------------|
-| **Handle**                  | [samudra038](https://codeforces.com/profile/samudra038) |
-| **Current Rating**          | Unrated                          |
-| **Maximum Rating**          | Unrated                          |
-| **Rank**                    | Unranked                         |
-| **Contribution**            | 0                                |
-<!-- CF-STATS-END -->
----
+![Codeforces Rating](https://img.shields.io/badge/Codeforces%20Rating-359%20%2B-blue)
+
 
 ## 📊 LeetCode Stats  
 ![LeetCode Stats](https://leetcard.jacoblin.cool/unordered_sam?theme=dark&font=Montserrat&ext=contest)
