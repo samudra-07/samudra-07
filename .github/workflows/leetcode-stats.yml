@@ -1,0 +1,53 @@
+name: Update LeetCode Stats
+
+on:
+  schedule:
+    - cron: '0 * * * *' # Runs every hour
+  workflow_dispatch:
+
+jobs:
+  update-leetcode:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Fetch LeetCode Stats
+        run: |
+          curl -s "https://alfa-leetcode-api.onrender.com/userProfile/unordered_sam" > leetcode.json
+
+      - name: Parse and Update README
+        run: |
+          python3 -c "
+import json
+
+# Read stats
+with open('leetcode.json', 'r') as f:
+    data = json.load(f)
+
+total_solved = data.get('totalSolved', 'N/A')
+easy_solved = data.get('easySolved', 'N/A')
+medium_solved = data.get('mediumSolved', 'N/A')
+hard_solved = data.get('hardSolved', 'N/A')
+
+# Update README.md
+with open('README.md', 'r') as f:
+    readme = f.read()
+
+updated_readme = readme.replace(
+    '<!-- LEETCODE_STATS -->',
+    f'Solved: {total_solved} • Easy: {easy_solved} • Medium: {medium_solved} • Hard: {hard_solved}'
+)
+
+with open('README.md', 'w') as f:
+    f.write(updated_readme)
+"
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git commit -m "Update LeetCode stats in README"
+          git push
