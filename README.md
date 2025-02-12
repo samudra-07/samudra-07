@@ -31,10 +31,13 @@ An innovative platform where customers post tasks, and workers bid to provide co
 ## 📊 Codeforces Stats
 
 <!-- CF-STATS -->
-Handle: [samudra038](https://codeforces.com/profile/samudra038)
-Rating: Unrated
-Max Rating: Unrated
-Contribution: 0
+| **Codeforces Stats**        |                                    |
+|-----------------------------|------------------------------------|
+| **Handle**                  | [samudra038](https://codeforces.com/profile/samudra038) |
+| **Current Rating**          | Unrated                          |
+| **Maximum Rating**          | Unrated                          |
+| **Rank**                    | Unranked                         |
+| **Contribution**            | 0                                |
 <!-- CF-STATS-END -->
 ---
 
