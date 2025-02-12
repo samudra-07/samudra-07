@@ -2,8 +2,9 @@ name: Update Codeforces Stats
 
 on:
   schedule:
-    - cron: '0 * * * *' # Runs every hour
-  workflow_dispatch:
+    - cron: "0 0 * * *" # Runs daily at midnight UTC
+  workflow_dispatch: # Allows manual triggering
+
 jobs:
   update-codeforces:
     runs-on: ubuntu-latest
@@ -27,8 +28,9 @@ jobs:
         handle = "samudra038"
         api_url = f"https://codeforces.com/api/user.info?handles={handle}"
         response = requests.get(api_url)
+        print("API Response:", response.json())
+        
         data = response.json()
-
         if data["status"] == "OK":
             user_info = data["result"][0]
             rating = user_info.get("rating", "Unrated")
@@ -58,6 +60,9 @@ jobs:
         else:
             print("Failed to fetch Codeforces stats")
         EOF
+
+    - name: Debug: Print Updated README
+      run: cat README.md
 
     - name: Commit changes
       run: |
