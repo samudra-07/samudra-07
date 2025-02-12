@@ -2,51 +2,34 @@ name: Update Codeforces Stats
 
 on:
   schedule:
-    - cron: '0 * * * *' # Runs every hour
-  workflow_dispatch:
+    - cron: "0 0 * * *" # Runs daily at midnight UTC
+  workflow_dispatch: # Allows manual triggering
 
 jobs:
   update-codeforces:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
+    - name: Checkout repository
+      uses: actions/checkout@v3
 
-      - name: Fetch Codeforces Stats
-        run: |
-          curl -s "https://codeforces.com/api/user.info?handles=samudra038" > codeforces.json
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.x
 
-      - name: Parse and Update README
-        run: |
-          python3 -c "
-import json
+    - name: Install dependencies
+      run: |
+        pip install requests
 
-# Read stats
-with open('codeforces.json', 'r') as f:
-    data = json.load(f)
+    - name: Fetch Codeforces Stats and Update README
+      run: |
+        python update_codeforces_stats.py
 
-user_info = data['result'][0]
-rating = user_info.get('rating', 'N/A')
-rank = user_info.get('rank', 'N/A')
-
-# Update README.md
-with open('README.md', 'r') as f:
-    readme = f.read()
-
-updated_readme = readme.replace(
-    '<!-- CODEFORCES_STATS -->',
-    f'Rating: {rating} • Rank: {rank}'
-)
-
-with open('README.md', 'w') as f:
-    f.write(updated_readme)
-"
-
-      - name: Commit and Push Changes
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add README.md
-          git commit -m "Update Codeforces stats in README"
-          git push
+    - name: Commit changes
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git add README.md
+        git commit -m "Update Codeforces stats" || echo "No changes to commit"
+        git push
