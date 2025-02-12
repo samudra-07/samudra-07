@@ -28,8 +28,13 @@ An innovative platform where customers post tasks, and workers bid to provide co
 ![Samudra's GitHub Stats](https://github-readme-stats.vercel.app/api?username=samudra-07&show_icons=true&theme=radical)  
 ![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=samudra-07&layout=compact&theme=radical)  
 
----
 ## 📊 Codeforces Stats
+
+<!-- CF-STATS -->
+Handle: [samudra038](https://codeforces.com/profile/samudra038)
+Rating: Unrated
+Max Rating: Unrated
+Contribution: 0
 <!-- CF-STATS-END -->
 ---
 
