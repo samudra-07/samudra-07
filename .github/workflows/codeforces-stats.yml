@@ -18,13 +18,47 @@ jobs:
       with:
         python-version: 3.x
 
-    - name: Install dependencies
-      run: |
-        pip install requests
-
     - name: Fetch Codeforces Stats and Update README
       run: |
-        python update_codeforces_stats.py
+        python - <<EOF
+        import requests
+        import re
+
+        # Fetch Codeforces stats
+        handle = "samudra038"
+        api_url = f"https://codeforces.com/api/user.info?handles={handle}"
+        response = requests.get(api_url)
+        data = response.json()
+
+        if data["status"] == "OK":
+            user_info = data["result"][0]
+            rating = user_info.get("rating", "Unrated")
+            max_rating = user_info.get("maxRating", "Unrated")
+            contribution = user_info.get("contribution", 0)
+
+            # Read the README file
+            with open("README.md", "r") as file:
+                readme = file.read()
+
+            # Update the README
+            updated_readme = re.sub(
+                r"## 📊 Codeforces Stats.*?<!-- CF-STATS-END -->",
+                f"## 📊 Codeforces Stats\n\n"
+                f"- **Handle:** [{handle}](https://codeforces.com/profile/{handle})\n"
+                f"- **Rating:** {rating}\n"
+                f"- **Max Rating:** {max_rating}\n"
+                f"- **Contribution:** {contribution}\n"
+                f"<!-- CF-STATS-END -->",
+                readme,
+                flags=re.DOTALL,
+            )
+
+            # Write the updated README back
+            with open("README.md", "w") as file:
+                file.write(updated_readme)
+        else:
+            print("Failed to fetch Codeforces stats")
+        EOF
 
     - name: Commit changes
       run: |
