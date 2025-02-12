@@ -2,72 +2,61 @@ name: Update Codeforces Stats
 
 on:
   schedule:
-    - cron: "0 0 * * *" # Runs daily at midnight UTC
-  workflow_dispatch: # Allows manual triggering
+    - cron: '0 * * * *' # Runs every hour
+  workflow_dispatch:
 
 jobs:
   update-codeforces:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      - name: Checkout Repository
+        uses: actions/checkout@v3
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: 3.x
+      - name: Fetch Codeforces Stats
+        run: |
+          curl -s "https://codeforces.com/api/user.info?handles=samudra038" > codeforces.json
 
-    - name: Fetch Codeforces Stats and Update README
-      run: |
-        python - <<EOF
-        import requests
-        import re
+      - name: Parse and Update README
+        run: |
+          python3 -c "
+import json
+import re
 
-        # Fetch Codeforces stats
-        handle = "samudra038"
-        api_url = f"https://codeforces.com/api/user.info?handles={handle}"
-        response = requests.get(api_url)
-        print("API Response:", response.json())
-        
-        data = response.json()
-        if data["status"] == "OK":
-            user_info = data["result"][0]
-            rating = user_info.get("rating", "Unrated")
-            max_rating = user_info.get("maxRating", "Unrated")
-            contribution = user_info.get("contribution", 0)
+# Read stats
+with open('codeforces.json', 'r') as f:
+    data = json.load(f)
 
-            # Read the README file
-            with open("README.md", "r") as file:
-                readme = file.read()
+if data.get('status') == 'OK':
+    user_info = data['result'][0]
+    handle = user_info.get('handle', 'N/A')
+    rating = user_info.get('rating', 'Unrated')
+    max_rating = user_info.get('maxRating', 'Unrated')
+    contribution = user_info.get('contribution', 0)
 
-            # Update the README
-            updated_readme = re.sub(
-                r"## 📊 Codeforces Stats.*?<!-- CF-STATS-END -->",
-                f"## 📊 Codeforces Stats\n\n"
-                f"- **Handle:** [{handle}](https://codeforces.com/profile/{handle})\n"
-                f"- **Rating:** {rating}\n"
-                f"- **Max Rating:** {max_rating}\n"
-                f"- **Contribution:** {contribution}\n"
-                f"<!-- CF-STATS-END -->",
-                readme,
-                flags=re.DOTALL,
-            )
+    # Read README.md
+    with open('README.md', 'r') as f:
+        readme = f.read()
 
-            # Write the updated README back
-            with open("README.md", "w") as file:
-                file.write(updated_readme)
-        else:
-            print("Failed to fetch Codeforces stats")
-        EOF
+    # Update README.md
+    updated_readme = re.sub(
+        r'<!-- CF-STATS -->.*?<!-- CF-STATS-END -->',
+        f'<!-- CF-STATS -->\\nHandle: [{handle}](https://codeforces.com/profile/{handle})\\nRating: {rating}\\nMax Rating: {max_rating}\\nContribution: {contribution}\\n<!-- CF-STATS-END -->',
+        readme,
+        flags=re.DOTALL
+    )
 
-    - name: Debug: Print Updated README
-      run: cat README.md
+    # Write back to README.md
+    with open('README.md', 'w') as f:
+        f.write(updated_readme)
+else:
+    print('Error fetching Codeforces stats')
+"
 
-    - name: Commit changes
-      run: |
-        git config --global user.name "github-actions[bot]"
-        git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-        git add README.md
-        git commit -m "Update Codeforces stats" || echo "No changes to commit"
-        git push
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git commit -m "Update Codeforces stats in README"
+          git push
