@@ -29,12 +29,8 @@ An innovative platform where customers post tasks, and workers bid to provide co
 ![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=samudra-07&layout=compact&theme=radical)  
 
 ---
-
 ## 📊 Codeforces Stats
-
 <!-- CF-STATS-END -->
-
-
 ---
 
 ## 📊 LeetCode Stats  
