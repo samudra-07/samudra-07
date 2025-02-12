@@ -2,8 +2,8 @@ name: Update Codeforces Stats
 
 on:
   schedule:
-    - cron: '0 * * * *' # Runs every hour
-  workflow_dispatch:
+    - cron: "*/1 * * * *" # Runs every minute
+  workflow_dispatch: # Allows manual triggering
 
 jobs:
   update-codeforces:
