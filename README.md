@@ -11,7 +11,7 @@ Welcome to my GitHub profile! I’m an enthusiastic and adaptable tech enthusias
 - **Special Interests:** AI/ML, Docker, Data Structures  
 
 ---
----
+
 ## 🌟 Project Highlights  
 ### 🚀 [WhatsApp Chat Summarizer](https://github.com/samudra-07/whatsapp-chat-summarizer)  
 Analyze and summarize WhatsApp chats for key insights using AI-powered algorithms.  
